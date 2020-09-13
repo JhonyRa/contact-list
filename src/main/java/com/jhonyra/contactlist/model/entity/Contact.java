@@ -1,11 +1,14 @@
 package com.jhonyra.contactlist.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Data;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "CONTACT")
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @Data
 public class Contact {
 
@@ -22,4 +25,5 @@ public class Contact {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PERSON", referencedColumnName = "ID", nullable = false)
     private Person person;
+
 }
