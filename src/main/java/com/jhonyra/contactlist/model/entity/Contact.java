@@ -1,29 +1,30 @@
 package com.jhonyra.contactlist.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 
 
 @Entity
-@Table(name = "CONTACT")
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@Embeddable
 @Data
+@Table(name = "CONTACT")
 public class Contact {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "PHONE", nullable = false)
+    @Column(name = "PHONE")
     private String phone;
 
-    @Column(name = "EMAIL", nullable = false)
+    @Column(name = "EMAIL")
     private String email;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PERSON", referencedColumnName = "ID", nullable = false)
+    @JoinColumn(name = "PERSON", referencedColumnName = "ID")
     private Person person;
 
 }

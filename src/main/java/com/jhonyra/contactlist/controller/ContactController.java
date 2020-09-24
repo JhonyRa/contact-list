@@ -31,4 +31,18 @@ public class ContactController {
         return contact;
     }
 
+    @PostMapping("/update")
+    public Contact updateContact(@RequestBody ContactDto contactDto){
+
+        Contact contact = contactDto.transformDtoToContactWithId();
+
+        this.contactService.update(contact);
+
+        return contact;
+    }
+
+    @PostMapping("/delete")
+    public Boolean deletePerson(@RequestBody Long contactId ){
+        return this.contactService.delete(contactId);
+    }
 }

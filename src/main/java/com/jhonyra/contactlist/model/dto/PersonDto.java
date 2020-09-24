@@ -25,8 +25,13 @@ public class PersonDto {
     public Person transformDtoToPersonWithoutId() {
 
         Person person = new Person();
-        person.setName(this.getName());
-        person.setNikname(this.getNikname());
+        if(this.getName() != null){
+            person.setName(this.getName());
+        }
+
+        if(this.getNikname() != null){
+            person.setNikname(this.getNikname());
+        }
 
         return person;
     }

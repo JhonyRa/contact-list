@@ -1,27 +1,27 @@
 package com.jhonyra.contactlist.model.entity;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "PERSON")
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@Embeddable
 @Data
+@Table(name = "PERSON")
 public class Person{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "NAME")
     private String name;
 
     @Column(name = "NICKNAME", nullable = true)
     private String nikname;
 
-    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private List<Contact> contacts;
 
 }
